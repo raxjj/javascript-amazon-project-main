@@ -80,6 +80,15 @@ let productsHTML=``
           
         }
 
+        let cartquantity= 0;
+        cart.forEach((item)=>{
+          cartquantity+=item.qunatity;
+        })
+
+
+        document.querySelector('.js-cart-quantity').innerHTML=cartquantity
+        console.log(cartquantity)
+
 
         console.log(cart)
     })
