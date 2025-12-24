@@ -1,3 +1,5 @@
+import { products } from '../data/products.js';
+import {cart, AddtoCart} from '../data/crat.js'
 let productsHTML=``
 
  products.forEach((product)=>{
@@ -21,7 +23,7 @@ let productsHTML=``
           </div>
 
           <div class="product-price">$
-           ${(product.priceCents/1000).toFixed(2)}
+           ${(product.priceCents/100).toFixed(2)}
           </div>
 
           <div class="product-quantity-container">
@@ -47,7 +49,8 @@ let productsHTML=``
           </div>
 
           <button class="add-to-cart-button button-primary js-add-to-cart" 
-          data-product-id= '${product.id}'>
+          data-product-id= '${product.id}'
+          >
             Add to Cart
           </button>
         </div>
@@ -58,37 +61,15 @@ let productsHTML=``
 
  document.querySelector('.js-products-grid').innerHTML= productsHTML  ;
 
+ 
+
+ 
+
+   
  document.querySelectorAll(".js-add-to-cart").forEach((button)=>{
     button.addEventListener('click', ()=>{
         const productId = button.dataset.productId;
-        let matchingitem ;
-
-        cart.forEach((item)=>{
-            if(item.productId==productId){
-              matchingitem= item;
-            }
-            
-        })
-        if(matchingitem){
-          matchingitem.qunatity+=1;
-        }
-        else{
-          cart.push({
-            productId:productId,
-            qunatity:1
-          })
-          
-        }
-
-        let cartquantity= 0;
-        cart.forEach((item)=>{
-          cartquantity+=item.qunatity;
-        })
-
-
-        document.querySelector('.js-cart-quantity').innerHTML=cartquantity
-        console.log(cartquantity)
-
+        AddtoCart(productId,button)
 
         console.log(cart)
     })
